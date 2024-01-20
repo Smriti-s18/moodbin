@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI tools to combat Corona</title>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+      function getit(){
+          $("#result").html("")
+          var text=$("#feeling").val();
+          //alert(text);
+          $.post( "/feel/",{'feeling':text,'csrfmiddlewaretoken': '{{ csrf_token }}',}, function(result) {
+              $("#result").html(result);
+          });
+      
+      }
+  </script> 
+  {% load static %}
+</head>       
+<body style="font-size: 22; color: rgb(0, 0, 0); background: rgb(251 226 235);text-align:center;font-family:cursive;">
+    <h1>Welcome to mood bin!</h1> 
+    <h2>Tell us your problem! We are here to help! 😄</h2>
+    <!-- <form action = "/" method = "POST">
+        {% csrf_token %} -->
+        <textarea name="feeling" id="feeling" cols="100" rows="10"></textarea><br>
+        <label>Your name: </label><input id="your_name" type="text" name="your_name">
+        <input type="submit" onclick="getit();false;" value="OK">
+    <!-- </form> -->
+    <br><div><span>AI response:  </span><span id="result"></span></div>
+</body>
+</html>
+
+
